@@ -255,13 +255,9 @@ function initCatalogModal() {
   
   catalogBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      // On mobile: let it open in new tab naturally (href works)
-      // On desktop: intercept and open modal
-      if (!isMobile) {
-        e.preventDefault();
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
+      e.preventDefault();
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     });
   });
   

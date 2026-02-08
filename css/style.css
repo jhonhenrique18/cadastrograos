@@ -221,15 +221,35 @@ a {
 .navbar-whatsapp {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: rgba(37,211,102,0.15);
   border: 1px solid rgba(37,211,102,0.3);
-  padding: 8px 16px;
+  padding: 7px 12px;
   border-radius: 50px;
   color: var(--whatsapp);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 420px) {
+  .navbar-whatsapp span {
+    display: none;
+  }
+  
+  .navbar-whatsapp {
+    padding: 8px;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    justify-content: center;
+  }
+  
+  .navbar-logo img {
+    height: 32px;
+  }
 }
 
 .navbar-whatsapp:hover {
@@ -278,22 +298,27 @@ a {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: var(--text-primary);
-  padding: 8px 16px;
+  background: var(--red);
+  border: none;
+  color: var(--white);
+  padding: 10px 20px;
   border-radius: var(--radius-md);
   font-family: var(--font);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .catalog-modal-close:hover {
-  background: rgba(229,57,53,0.15);
-  border-color: rgba(229,57,53,0.3);
-  color: var(--red);
+  background: #c62828;
+}
+
+@media (max-width: 768px) {
+  .catalog-modal-close {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
 }
 
 .catalog-modal-body {
@@ -1285,10 +1310,6 @@ a {
 @media (max-width: 359px) {
   .hero-cta-group {
     flex-direction: column;
-  }
-  
-  .navbar-whatsapp span {
-    display: none;
   }
   
   .products-grid {
