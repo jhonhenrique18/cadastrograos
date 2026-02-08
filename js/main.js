@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormHandling();
   initNavbarScroll();
   initCatalogModal();
+  initWhatsAppTracking();
+  initScrollTracking();
 });
 
 /* ---------- Particle Background ---------- */
@@ -277,6 +279,46 @@ function initCatalogModal() {
       document.body.style.overflow = '';
     }
   });
+}
+
+/* ---------- WhatsApp Click Tracking (Meta Pixel) ---------- */
+function initWhatsAppTracking() {
+  const whatsappLinks = document.querySelectorAll('a[href*="wa.me"], .whatsapp-float');
+  
+  whatsappLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact', {
+          content_name: 'WhatsApp Click',
+          content_category: 'WhatsApp'
+        });
+      }
+    });
+  });
+}
+
+/* ---------- Scroll Depth Tracking (Meta Pixel) ---------- */
+function initScrollTracking() {
+  const thresholds = [25, 50, 75, 100];
+  const tracked = new Set();
+  
+  window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) return;
+    
+    const scrollPercent = Math.round((window.pageYOffset / scrollHeight) * 100);
+    
+    thresholds.forEach(threshold => {
+      if (scrollPercent >= threshold && !tracked.has(threshold)) {
+        tracked.add(threshold);
+        if (typeof fbq === 'function') {
+          fbq('trackCustom', 'ScrollDepth', {
+            percent: threshold
+          });
+        }
+      }
+    });
+  }, { passive: true });
 }
 
 /* ---------- Smooth scroll for anchor links ---------- */
