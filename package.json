@@ -1,0 +1,12 @@
+{
+  "name": "graos-sa-landing",
+  "version": "1.0.0",
+  "description": "Landing page B2B - Grãos S.A. Paraguay",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

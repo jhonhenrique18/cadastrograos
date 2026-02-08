@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es-PY">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grãos S.A. | Especias y Condimentos al por Mayor en Paraguay</title>
+  <meta name="description" content="Importadora y distribuidora mayorista de especias, condimentos y hierbas medicinales. Importación directa de 16 países. El mejor precio del Paraguay.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Grãos S.A. | Especias al por Mayor">
+  <meta property="og:description" content="Importación directa de 16 países. Mejor precio. Mejor calidad. Entregas en todo Paraguay.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- ========== FLOATING WHATSAPP BUTTON ========== -->
+  <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20información%20sobre%20precios%20mayoristas%20de%20especias%20y%20condimentos." 
+     class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="navbar-logo">
+        <img src="/assets/images/logo-graos-sa.png" alt="Grãos S.A." width="160" height="auto">
+      </a>
+      <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20información%20sobre%20precios%20mayoristas." 
+         class="navbar-whatsapp" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+        <span>+595 983 002 684</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="inicio">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="container hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          Importación directa de 16 países
+        </div>
+        <h1>
+          Especias y condimentos <span class="text-gradient">al por mayor</span> en todo Paraguay
+        </h1>
+        <p class="hero-subtitle">
+          ¿Tenés un negocio y comprás especias y condimentos? Nosotros importamos directo, 
+          <strong>sin intermediarios</strong>. Eso significa <strong>mejor precio y mejor calidad</strong> para vos.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#registro" class="btn btn-primary btn-lg">
+            Quiero mejores precios
+          </a>
+          <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20cotización%20de%20especias%20al%20por%20mayor." 
+             class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i>
+            Hablá con nosotros
+          </a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-bar"></div>
+          <span>Más de <strong>500 negocios</strong> en Paraguay ya compran con nosotros</span>
+        </div>
+      </div>
+      <div class="hero-form-wrapper" id="registro">
+        <div class="form-card">
+          <div class="form-card-header">
+            <h2>Registrate y recibí tu cotización</h2>
+            <p>Nuestro vendedor te contacta en menos de 24hs</p>
+          </div>
+          <form id="leadForm" class="lead-form">
+            
+            <div class="form-group">
+              <label for="nombre">Tu nombre</label>
+              <div class="input-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="whatsapp">Tu WhatsApp</label>
+              <div class="input-icon">
+                <i class="fab fa-whatsapp"></i>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="0983 002 684" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="ciudad">Tu ciudad</label>
+              <div class="input-icon">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Asunción, CDE, Encarnación..." required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="negocio">Tipo de negocio</label>
+              <div class="input-icon">
+                <i class="fas fa-building"></i>
+                <select id="negocio" name="tipo_negocio" required>
+                  <option value="" disabled selected>Seleccioná tu tipo de negocio</option>
+                  <option value="distribuidor">Distribuidor / Revendedor</option>
+                  <option value="tienda">Tienda / Mercado</option>
+                  <option value="restaurante">Restaurante / Hotel / Gastronomía</option>
+                  <option value="consumidor_final">Consumidor final</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block btn-submit" id="btnSubmit">
+              <span class="btn-text">QUIERO MEJORES PRECIOS</span>
+              <span class="btn-loading" style="display:none">
+                <i class="fas fa-spinner fa-spin"></i> Enviando...
+              </span>
+            </button>
+            
+            <p class="form-disclaimer">
+              <i class="fas fa-lock"></i> Tus datos son privados. Solo los usamos para contactarte.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS BAR ========== -->
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-target="16">0</div>
+        <div class="stat-label">Países de importación</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="500">0</div>
+        <div class="stat-label">Clientes activos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="1000">0</div>
+        <div class="stat-label">Importaciones realizadas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="8">0</div>
+        <div class="stat-label">Años de experiencia</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTS SECTION ========== -->
+  <section class="products" id="productos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Importación directa</span>
+        <h2>Especias y condimentos para tu negocio</h2>
+        <p>De 16 países directo a tu negocio. Sin intermediarios. Sacos y cajas cerradas.</p>
+      </div>
+
+      <div class="products-grid">
+        <!-- Canela -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/canela-en-rama.png" alt="Canela en Rama" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Canela en Rama 6cm</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Vietnam</span>
+              <span><i class="fas fa-box"></i> 10 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Anis Estrelado -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/anis-estrellado.png" alt="Anís Estrellado" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Anís Estrellado</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Vietnam</span>
+              <span><i class="fas fa-box"></i> 10 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hibisco (movido pra cima) -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/flor-de-jamaica.png" alt="Flor de Jamaica" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Flor de Jamaica</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Nigeria</span>
+              <span><i class="fas fa-box"></i> 25 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comino -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/comino-en-grano.png" alt="Comino en Grano" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Comino en Grano</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Egipto</span>
+              <span><i class="fas fa-box"></i> 25 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clavo de Olor -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/clavo-de-olor.png" alt="Clavo de Olor" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Clavo de Olor</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Brasil</span>
+              <span><i class="fas fa-box"></i> 25 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curcuma -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/curcuma-en-polvo.png" alt="Cúrcuma en Polvo" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Cúrcuma en Polvo</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> India</span>
+              <span><i class="fas fa-box"></i> 10 Kg / 25 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Anís (Erva Doce) -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/anis-en-grano.png" alt="Anís en Grano" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Anís en Grano</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Egipto</span>
+              <span><i class="fas fa-box"></i> 25 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manzanilla -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/manzanilla-flor.png" alt="Manzanilla Flor" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Manzanilla Flor</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Egipto / Brasil</span>
+              <span><i class="fas fa-box"></i> 12,5 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ají Molido -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/aji-molido.png" alt="Ají Molido" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Ají Molido</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Importado</span>
+              <span><i class="fas fa-box"></i> Sacos cerrados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Oregano -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/oregano-peruano.png" alt="Orégano Peruano" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Orégano Peruano</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Perú</span>
+              <span><i class="fas fa-box"></i> Sacos cerrados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pimienta Negra -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/pimienta-negra.png" alt="Pimienta Negra" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Pimienta Negra en Grano</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Brasil / Vietnam</span>
+              <span><i class="fas fa-box"></i> 25 Kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Laurel -->
+        <div class="product-card" data-aos="fade-up">
+          <div class="product-image">
+            <img src="/assets/images/laurel-hoja.png" alt="Laurel en Hoja" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>Laurel en Hojas</h3>
+            <div class="product-meta">
+              <span><i class="fas fa-globe"></i> Turquía</span>
+              <span><i class="fas fa-box"></i> 25 Kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Products -->
+      <div class="products-secondary">
+        <div class="secondary-card">
+          <h3>También trabajamos con frutos secos</h3>
+          <p><strong>Almendras, castañas de cajú, nueces, pistachos, harina de almendra</strong> y más. Siempre en stock. Consultanos por precios.</p>
+          <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20cotización%20de%20frutos%20secos%20al%20por%20mayor." 
+             class="btn btn-outline" target="_blank" rel="noopener">
+            Consultar frutos secos
+          </a>
+        </div>
+      </div>
+
+      <!-- Catalog Download -->
+      <div class="catalog-section">
+        <div class="catalog-card">
+          <div class="catalog-text">
+            <h3>Catálogo completo de productos</h3>
+            <p>Conocé todas nuestras líneas: especias, condimentos, hierbas medicinales, frutos secos y más.</p>
+          </div>
+          <div class="catalog-actions">
+            <a href="/assets/catalogo-graos-sa.pdf" target="_blank" class="btn btn-primary catalog-btn">
+              Ver catálogo completo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY US SECTION ========== -->
+  <section class="why-us" id="nosotros">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">¿Por qué Grãos S.A.?</span>
+        <h2>Tu proveedor estratégico en Paraguay</h2>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-plane-departure"></i>
+          </div>
+          <h3>Importación directa</h3>
+          <p>Traemos de Vietnam, India, Egipto, Perú, Brasil y más. Sin intermediarios = mejor precio para vos.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3>Calidad certificada</h3>
+          <p>Productos frescos, con trazabilidad completa desde el origen. Siempre la mejor calidad.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-tags"></i>
+          </div>
+          <h3>Más comprás, menos pagás</h3>
+          <p>Precios escalonados por volumen. Cuanto más llevás, mejor es tu precio. Así de simple.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3>Entrega en todo Paraguay</h3>
+          <p>Asunción, Ciudad del Este, Encarnación, Pedro Juan Caballero... Llegamos a donde estés.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-boxes-stacked"></i>
+          </div>
+          <h3>Embalajes cerrados</h3>
+          <p>Vendemos en cajas y sacos cerrados de 10Kg, 25Kg. Producto íntegro, sin manipulación.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>Atención personalizada</h3>
+          <p>Un vendedor dedicado para tu negocio. Te asesoramos y te ayudamos a crecer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA / SECOND FORM ========== -->
+  <section class="cta-section" id="contacto">
+    <div class="container">
+      <div class="cta-wrapper">
+        <div class="cta-text">
+          <h2>¿Querés <span class="text-gradient">pagar menos</span> por tus condimentos?</h2>
+          <p>Dejanos tu número y un vendedor te contacta para ofrecerte los mejores precios del mercado. Sin compromiso.</p>
+          <ul class="cta-benefits">
+            <li><i class="fas fa-check-circle"></i> Cotización personalizada</li>
+            <li><i class="fas fa-check-circle"></i> Precios exclusivos mayoristas</li>
+            <li><i class="fas fa-check-circle"></i> Respuesta en menos de 24 horas</li>
+          </ul>
+          <div class="cta-whatsapp">
+            <span>¿Preferís hablar directo?</span>
+            <a href="https://wa.me/595983002684?text=Hola%2C%20vi%20su%20publicidad%20y%20quiero%20cotización%20mayorista." 
+               class="btn btn-whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> +595 983 002 684
+            </a>
+          </div>
+        </div>
+        <div class="cta-form">
+          <div class="form-card form-card-alt">
+            <div class="form-card-header">
+              <h2>Registrate ahora</h2>
+              <p>Es gratis y sin compromiso</p>
+            </div>
+            <form id="leadForm2" class="lead-form">
+              
+              <div class="form-group">
+                <div class="input-icon">
+                  <i class="fas fa-user"></i>
+                  <input type="text" name="nombre" placeholder="Tu nombre" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-icon">
+                  <i class="fab fa-whatsapp"></i>
+                  <input type="tel" name="whatsapp" placeholder="Tu WhatsApp" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <input type="text" name="ciudad" placeholder="Tu ciudad" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-icon">
+                  <i class="fas fa-building"></i>
+                  <select name="tipo_negocio" required>
+                    <option value="" disabled selected>Tipo de negocio</option>
+                    <option value="distribuidor">Distribuidor / Revendedor</option>
+                    <option value="tienda">Tienda / Mercado</option>
+                    <option value="restaurante">Restaurante / Hotel</option>
+                    <option value="consumidor_final">Consumidor final</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block btn-submit">
+                <span class="btn-text">QUIERO MEJORES PRECIOS</span>
+                <span class="btn-loading" style="display:none">
+                  <i class="fas fa-spinner fa-spin"></i> Enviando...
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="/assets/images/logo-graos-sa.png" alt="Grãos S.A." width="140">
+          <p>Importadora y distribuidora mayorista de productos naturales, especias, condimentos y hierbas medicinales para todo el Paraguay.</p>
+        </div>
+        <div class="footer-contact">
+          <h4>Contacto directo</h4>
+          <a href="https://wa.me/595983002684" target="_blank" rel="noopener" class="footer-whatsapp">
+            <i class="fab fa-whatsapp"></i> +595 983 002 684
+          </a>
+          <a href="mailto:jhonatan@grupo-dip.com" class="footer-email">
+            <i class="fas fa-envelope"></i> jhonatan@grupo-dip.com
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Grãos S.A. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== CATALOG MODAL ========== -->
+  <div class="catalog-modal" id="catalogModal">
+    <div class="catalog-modal-header">
+      <span class="catalog-modal-title">Catálogo Grãos S.A.</span>
+      <button class="catalog-modal-close" id="closeCatalog">
+        <i class="fas fa-times"></i> Cerrar
+      </button>
+    </div>
+    <div class="catalog-modal-body">
+      <iframe src="/assets/catalogo-graos-sa.pdf" width="100%" height="100%"></iframe>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

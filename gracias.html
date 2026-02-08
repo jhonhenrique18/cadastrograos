@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es-PY">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Gracias! | Grãos S.A.</title>
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="thankyou-body">
+
+  <!-- ========== THANK YOU PAGE ========== -->
+  <div class="thankyou-wrapper">
+    <div class="thankyou-card">
+      <!-- Logo -->
+      <a href="/" class="thankyou-logo">
+        <img src="/assets/images/logo-graos-sa.png" alt="Grãos S.A." width="180">
+      </a>
+
+      <!-- Success Icon -->
+      <div class="thankyou-icon">
+        <div class="success-circle">
+          <i class="fas fa-check"></i>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <h1>¡Gracias, <span id="leadName">amigo</span>!</h1>
+      <p class="thankyou-message">
+        Recibimos tu registro. Nuestro vendedor te va a contactar pronto para ofrecerte los mejores precios mayoristas en especias y condimentos.
+      </p>
+
+      <!-- Urgency CTA -->
+      <div class="thankyou-urgent">
+        <p class="urgent-label">¿Es urgente? Hablá directo con nosotros:</p>
+        <a href="https://wa.me/595983002684?text=Hola%2C%20acabo%20de%20registrarme%20en%20su%20página%20y%20necesito%20atención%20inmediata." 
+           class="btn btn-whatsapp btn-lg btn-block" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i>
+          Atención inmediata por WhatsApp
+        </a>
+        <p class="urgent-number">
+          +595 983 002 684
+        </p>
+      </div>
+
+      <!-- Back Link -->
+      <a href="/" class="thankyou-back">
+        <i class="fas fa-arrow-left"></i> Volver al inicio
+      </a>
+    </div>
+
+    <!-- Confetti animation -->
+    <div class="confetti" id="confetti"></div>
+  </div>
+
+  <script>
+    // Get name from URL params and display it
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const nombre = params.get('nombre');
+      
+      if (nombre) {
+        const nameEl = document.getElementById('leadName');
+        nameEl.textContent = decodeURIComponent(nombre);
+      }
+    })();
+
+    // Confetti animation
+    (function() {
+      const confettiContainer = document.getElementById('confetti');
+      const colors = ['#4A7C2F', '#6B8E3A', '#E8C840', '#F5A623', '#ffffff'];
+      
+      for (let i = 0; i < 50; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 3 + 's';
+        piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confettiContainer.appendChild(piece);
+      }
+      
+      setTimeout(() => {
+        confettiContainer.style.opacity = '0';
+        confettiContainer.style.transition = 'opacity 1s';
+      }, 5000);
+    })();
+  </script>
+</body>
+</html>

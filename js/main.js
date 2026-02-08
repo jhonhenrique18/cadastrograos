@@ -1,0 +1,297 @@
+/* ================================================
+   GRÃOS S.A. - LANDING PAGE JS
+   Webhook form, animations, counters
+   ================================================ */
+
+// ---- CONFIGURATION ----
+// Change this to your webhook URL (Make, Zapier, n8n, custom API, etc.)
+const WEBHOOK_URL = 'https://hook.us1.make.com/inkz32f2u99o4admj7k3j794621gtn98';
+
+document.addEventListener('DOMContentLoaded', () => {
+  initParticles();
+  initCounters();
+  initRevealAnimations();
+  initFormHandling();
+  initNavbarScroll();
+  initCatalogModal();
+});
+
+/* ---------- Particle Background ---------- */
+function initParticles() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  
+  const count = window.innerWidth < 768 ? 15 : 30;
+  
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    particle.style.animationDelay = (Math.random() * 10) + 's';
+    particle.style.width = particle.style.height = (Math.random() * 3 + 2) + 'px';
+    
+    const colors = [
+      'rgba(74,124,47,0.3)',
+      'rgba(232,200,64,0.2)',
+      'rgba(107,142,58,0.25)',
+      'rgba(245,166,35,0.15)'
+    ];
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    
+    container.appendChild(particle);
+  }
+}
+
+/* ---------- Animated Counters ---------- */
+function initCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  if (!counters.length) return;
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  counters.forEach(counter => observer.observe(counter));
+}
+
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 2000;
+  const start = performance.now();
+  
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    
+    el.textContent = current.toLocaleString('es-PY');
+    
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target.toLocaleString('es-PY');
+    }
+  }
+  
+  requestAnimationFrame(update);
+}
+
+/* ---------- Reveal Animations (Scroll) ---------- */
+function initRevealAnimations() {
+  const reveals = document.querySelectorAll(
+    '.product-card, .benefit-card, .secondary-card, .section-header, .cta-text, .cta-form, .catalog-card'
+  );
+  
+  if (!reveals.length) return;
+  
+  reveals.forEach(el => el.classList.add('reveal'));
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(entry.target.parentElement.children);
+        const idx = siblings.indexOf(entry.target);
+        
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, idx * 80);
+        
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { 
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  });
+  
+  reveals.forEach(el => observer.observe(el));
+}
+
+/* ---------- Form Handling (Webhook) ---------- */
+function initFormHandling() {
+  const forms = document.querySelectorAll('.lead-form');
+  
+  forms.forEach(form => {
+    // Phone mask
+    const phoneInputs = form.querySelectorAll('input[type="tel"]');
+    phoneInputs.forEach(input => {
+      input.addEventListener('input', handlePhoneMask);
+      input.addEventListener('focus', () => {
+        if (!input.value) input.value = '0';
+      });
+    });
+    
+    // Form submission via webhook
+    form.addEventListener('submit', handleFormSubmit);
+  });
+}
+
+function handlePhoneMask(e) {
+  let value = e.target.value.replace(/\D/g, '');
+  
+  if (value.length > 11) {
+    value = value.slice(0, 11);
+  }
+  
+  // Format: 0XXX XXX XXX
+  if (value.length > 7) {
+    value = value.slice(0, 4) + ' ' + value.slice(4, 7) + ' ' + value.slice(7);
+  } else if (value.length > 4) {
+    value = value.slice(0, 4) + ' ' + value.slice(4);
+  }
+  
+  e.target.value = value;
+}
+
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const submitBtn = form.querySelector('.btn-submit');
+  const btnText = submitBtn.querySelector('.btn-text');
+  const btnLoading = submitBtn.querySelector('.btn-loading');
+  
+  // Get form data
+  const nombre = form.querySelector('[name="nombre"]').value.trim();
+  const whatsapp = form.querySelector('[name="whatsapp"]').value.trim();
+  const ciudad = form.querySelector('[name="ciudad"]').value.trim();
+  const tipoNegocio = form.querySelector('[name="tipo_negocio"]').value;
+  
+  // Validate phone
+  const phoneDigits = whatsapp.replace(/\D/g, '');
+  if (phoneDigits.length < 10) {
+    const phoneInput = form.querySelector('input[type="tel"]');
+    phoneInput.style.borderColor = '#E53935';
+    phoneInput.focus();
+    
+    const originalPlaceholder = phoneInput.placeholder;
+    phoneInput.placeholder = 'Número incompleto...';
+    phoneInput.value = '';
+    
+    setTimeout(() => {
+      phoneInput.style.borderColor = '';
+      phoneInput.placeholder = originalPlaceholder;
+    }, 2000);
+    return;
+  }
+  
+  // Validate required fields
+  if (!nombre || !ciudad || !tipoNegocio) {
+    return;
+  }
+  
+  // Show loading
+  if (btnText && btnLoading) {
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline-flex';
+  }
+  submitBtn.disabled = true;
+  
+  // Prepare payload
+  const payload = {
+    nombre: nombre,
+    whatsapp: whatsapp,
+    ciudad: ciudad,
+    tipo_negocio: tipoNegocio,
+    fecha: new Date().toISOString(),
+    origen: 'Landing Page Grãos S.A.'
+  };
+  
+  // Send to webhook
+  try {
+    if (WEBHOOK_URL && WEBHOOK_URL !== 'YOUR_WEBHOOK_URL_HERE') {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      });
+    }
+  } catch (error) {
+    // Don't block the user if webhook fails
+    console.warn('Webhook error:', error);
+  }
+  
+  // Always redirect to thank you page with name
+  const encodedName = encodeURIComponent(nombre.split(' ')[0]);
+  window.location.href = '/gracias?nombre=' + encodedName;
+}
+
+/* ---------- Navbar Scroll Effect ---------- */
+function initNavbarScroll() {
+  const navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+      navbar.style.background = 'rgba(10,10,10,0.95)';
+      navbar.style.borderBottomColor = 'rgba(74,124,47,0.15)';
+    } else {
+      navbar.style.background = 'rgba(10,10,10,0.85)';
+      navbar.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+    }
+  }, { passive: true });
+}
+
+/* ---------- Catalog Modal (Desktop only) ---------- */
+function initCatalogModal() {
+  const modal = document.getElementById('catalogModal');
+  if (!modal) return;
+  
+  const catalogBtns = document.querySelectorAll('.catalog-btn');
+  const closeBtn = document.getElementById('closeCatalog');
+  const isMobile = window.innerWidth < 768;
+  
+  catalogBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // On mobile: let it open in new tab naturally (href works)
+      // On desktop: intercept and open modal
+      if (!isMobile) {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+  
+  // Close with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
+
+/* ---------- Smooth scroll for anchor links ---------- */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const navHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+      const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+      
+      window.scrollTo({
+        top: targetPos,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
