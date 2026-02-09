@@ -196,13 +196,34 @@ async function handleFormSubmit(e) {
   }
   submitBtn.disabled = true;
   
+  // Date and time separated
+  const now = new Date();
+  const fecha = now.toLocaleDateString('es-PY', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const hora = now.toLocaleTimeString('es-PY', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+  
+  // Capture UTMs from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const utmSource = urlParams.get('utm_source') || '';
+  const utmMedium = urlParams.get('utm_medium') || '';
+  const utmCampaign = urlParams.get('utm_campaign') || '';
+  const utmContent = urlParams.get('utm_content') || '';
+  const utmTerm = urlParams.get('utm_term') || '';
+  const fbclid = urlParams.get('fbclid') || '';
+  
   // Prepare form data (Make.com parses each field separately)
   const formData = new FormData();
   formData.append('nombre', nombre);
   formData.append('whatsapp', whatsapp);
   formData.append('ciudad', ciudad);
   formData.append('tipo_negocio', tipoNegocio);
-  formData.append('fecha', new Date().toISOString());
+  formData.append('fecha', fecha);
+  formData.append('hora', hora);
+  formData.append('utm_source', utmSource);
+  formData.append('utm_medium', utmMedium);
+  formData.append('utm_campaign', utmCampaign);
+  formData.append('utm_content', utmContent);
+  formData.append('utm_term', utmTerm);
+  formData.append('fbclid', fbclid);
   formData.append('origen', 'Landing Page Grãos S.A.');
   
   // Send to webhook
