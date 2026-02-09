@@ -196,23 +196,21 @@ async function handleFormSubmit(e) {
   }
   submitBtn.disabled = true;
   
-  // Prepare payload
-  const payload = {
-    nombre: nombre,
-    whatsapp: whatsapp,
-    ciudad: ciudad,
-    tipo_negocio: tipoNegocio,
-    fecha: new Date().toISOString(),
-    origen: 'Landing Page Grãos S.A.'
-  };
+  // Prepare form data (Make.com parses each field separately)
+  const formData = new FormData();
+  formData.append('nombre', nombre);
+  formData.append('whatsapp', whatsapp);
+  formData.append('ciudad', ciudad);
+  formData.append('tipo_negocio', tipoNegocio);
+  formData.append('fecha', new Date().toISOString());
+  formData.append('origen', 'Landing Page Grãos S.A.');
   
   // Send to webhook
   try {
     if (WEBHOOK_URL && WEBHOOK_URL !== 'YOUR_WEBHOOK_URL_HERE') {
       await fetch(WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: formData,
         mode: 'no-cors'
       });
     }
