@@ -2,14 +2,14 @@
 <html lang="es-PY">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>¡Gracias! | Grãos S.A.</title>
   <meta name="robots" content="noindex, nofollow">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -93,12 +93,16 @@
       }
     })();
 
-    // Confetti animation
+    // Confetti animation (reduced on mobile for performance)
     (function() {
+      // Skip confetti if user prefers reduced motion
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      
       const confettiContainer = document.getElementById('confetti');
       const colors = ['#4A7C2F', '#6B8E3A', '#E8C840', '#F5A623', '#ffffff'];
+      const count = window.innerWidth < 768 ? 20 : 50;
       
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < count; i++) {
         const piece = document.createElement('div');
         piece.className = 'confetti-piece';
         piece.style.left = Math.random() * 100 + '%';
@@ -108,9 +112,13 @@
         confettiContainer.appendChild(piece);
       }
       
+      // Fade out and remove confetti elements to free memory
       setTimeout(() => {
         confettiContainer.style.opacity = '0';
         confettiContainer.style.transition = 'opacity 1s';
+        setTimeout(() => {
+          confettiContainer.innerHTML = '';
+        }, 1000);
       }, 5000);
     })();
   </script>

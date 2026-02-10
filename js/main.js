@@ -23,7 +23,10 @@ function initParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
   
-  const count = window.innerWidth < 768 ? 15 : 30;
+  // Respect reduced-motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  
+  const count = window.innerWidth < 768 ? 8 : 30;
   
   for (let i = 0; i < count; i++) {
     const particle = document.createElement('div');
@@ -100,10 +103,11 @@ function initRevealAnimations() {
       if (entry.isIntersecting) {
         const siblings = Array.from(entry.target.parentElement.children);
         const idx = siblings.indexOf(entry.target);
+        const delay = Math.min(idx * 50, 400); // Cap stagger at 400ms max
         
         setTimeout(() => {
           entry.target.classList.add('visible');
-        }, idx * 80);
+        }, delay);
         
         observer.unobserve(entry.target);
       }
@@ -296,20 +300,45 @@ function initCatalogModal() {
   });
 }
 
-/* ---------- Floating CTA Button (appears after scrolling past hero form) ---------- */
+/* ---------- Floating CTA Button (appears after scrolling past hero form, hides near 2nd form) ---------- */
 function initFloatingCta() {
   const floatingCta = document.getElementById('floatingCta');
   const heroForm = document.getElementById('registro');
+  const ctaSection = document.getElementById('contacto');
   if (!floatingCta || !heroForm) return;
   
-  const observer = new IntersectionObserver((entries) => {
+  let heroVisible = true;
+  let ctaVisible = false;
+  
+  function updateVisibility() {
+    if (heroVisible || ctaVisible) {
+      floatingCta.style.display = 'none';
+      floatingCta.classList.add('hidden-cta');
+    } else {
+      floatingCta.style.display = 'block';
+      floatingCta.classList.remove('hidden-cta');
+    }
+  }
+  
+  // Watch hero form
+  const heroObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Show floating CTA when hero form is NOT visible
-      floatingCta.style.display = entry.isIntersecting ? 'none' : 'block';
+      heroVisible = entry.isIntersecting;
+      updateVisibility();
     });
   }, { threshold: 0.1 });
+  heroObserver.observe(heroForm);
   
-  observer.observe(heroForm);
+  // Watch CTA section (second form) - hide floating CTA when user can see the 2nd form
+  if (ctaSection) {
+    const ctaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        ctaVisible = entry.isIntersecting;
+        updateVisibility();
+      });
+    }, { threshold: 0.1 });
+    ctaObserver.observe(ctaSection);
+  }
 }
 
 /* ---------- Scroll Depth Tracking (Meta Pixel) ---------- */
