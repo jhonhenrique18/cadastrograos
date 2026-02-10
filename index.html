@@ -41,11 +41,12 @@
 </head>
 <body>
 
-  <!-- ========== FLOATING WHATSAPP BUTTON ========== -->
-  <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20información%20sobre%20precios%20mayoristas%20de%20especias%20y%20condimentos." 
-     class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+  <!-- ========== FLOATING CTA BUTTON ========== -->
+  <div class="floating-cta" id="floatingCta" style="display:none">
+    <a href="#registro" class="btn btn-primary">
+      <i class="fas fa-clipboard-list"></i> Registrate ahora
+    </a>
+  </div>
 
   <!-- ========== NAVBAR ========== -->
   <nav class="navbar">
@@ -53,10 +54,8 @@
       <a href="#" class="navbar-logo">
         <img src="/assets/images/logo-graos-sa.png" alt="Grãos S.A." width="160" height="auto">
       </a>
-      <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20información%20sobre%20precios%20mayoristas." 
-         class="navbar-whatsapp" target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i>
-        <span>+595 983 002 684</span>
+      <a href="#registro" class="btn btn-primary btn-nav-cta">
+        Registrate
       </a>
     </div>
   </nav>
@@ -81,11 +80,6 @@
           <a href="#registro" class="btn btn-primary btn-lg">
             Quiero mejores precios
           </a>
-          <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20cotización%20de%20especias%20al%20por%20mayor." 
-             class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i>
-            Hablá con nosotros
-          </a>
         </div>
         <div class="hero-trust">
           <div class="hero-trust-bar"></div>
@@ -96,7 +90,7 @@
         <div class="form-card">
           <div class="form-card-header">
             <h2>Registrate y recibí tu cotización</h2>
-            <p>Nuestro vendedor te contacta en menos de 24hs</p>
+            <p>Completá el formulario y nuestro vendedor te contacta con los mejores precios en menos de 24hs</p>
           </div>
           <form id="leadForm" class="lead-form">
             
@@ -133,7 +127,8 @@
                   <option value="distribuidor">Distribuidor / Revendedor</option>
                   <option value="tienda">Tienda / Mercado</option>
                   <option value="restaurante">Restaurante / Hotel / Gastronomía</option>
-                  <option value="consumidor_final">Consumidor final</option>
+                  <option value="quiero_revender">Quiero empezar a revender</option>
+                  <option value="consumidor_final">Consumidor final (compra para uso propio en menor cantidad)</option>
                   <option value="otro">Otro</option>
                 </select>
               </div>
@@ -361,9 +356,8 @@
         <div class="secondary-card">
           <h3>También trabajamos con frutos secos</h3>
           <p><strong>Almendras, castañas de cajú, nueces, pistachos, harina de almendra</strong> y más. Siempre en stock. Consultanos por precios.</p>
-          <a href="https://wa.me/595983002684?text=Hola%2C%20quiero%20cotización%20de%20frutos%20secos%20al%20por%20mayor." 
-             class="btn btn-outline" target="_blank" rel="noopener">
-            Consultar frutos secos
+          <a href="#registro" class="btn btn-outline">
+            Registrate y consultá precios
           </a>
         </div>
       </div>
@@ -451,19 +445,12 @@
       <div class="cta-wrapper">
         <div class="cta-text">
           <h2>¿Querés <span class="text-gradient">pagar menos</span> por tus condimentos?</h2>
-          <p>Dejanos tu número y un vendedor te contacta para ofrecerte los mejores precios del mercado. Sin compromiso.</p>
+          <p>Registrate y recibí atención de nuestro vendedor con los mejores precios del mercado. Es la única forma de acceder a nuestras cotizaciones exclusivas.</p>
           <ul class="cta-benefits">
             <li><i class="fas fa-check-circle"></i> Cotización personalizada</li>
             <li><i class="fas fa-check-circle"></i> Precios exclusivos mayoristas</li>
             <li><i class="fas fa-check-circle"></i> Respuesta en menos de 24 horas</li>
           </ul>
-          <div class="cta-whatsapp">
-            <span>¿Preferís hablar directo?</span>
-            <a href="https://wa.me/595983002684?text=Hola%2C%20vi%20su%20publicidad%20y%20quiero%20cotización%20mayorista." 
-               class="btn btn-whatsapp" target="_blank" rel="noopener">
-              <i class="fab fa-whatsapp"></i> +595 983 002 684
-            </a>
-          </div>
         </div>
         <div class="cta-form">
           <div class="form-card form-card-alt">
@@ -498,8 +485,9 @@
                     <option value="" disabled selected>Tipo de negocio</option>
                     <option value="distribuidor">Distribuidor / Revendedor</option>
                     <option value="tienda">Tienda / Mercado</option>
-                    <option value="restaurante">Restaurante / Hotel</option>
-                    <option value="consumidor_final">Consumidor final</option>
+                    <option value="restaurante">Restaurante / Hotel / Gastronomía</option>
+                    <option value="quiero_revender">Quiero empezar a revender</option>
+                    <option value="consumidor_final">Consumidor final (uso propio)</option>
                     <option value="otro">Otro</option>
                   </select>
                 </div>
@@ -526,9 +514,10 @@
           <p>Importadora y distribuidora mayorista de productos naturales, especias, condimentos y hierbas medicinales para todo el Paraguay.</p>
         </div>
         <div class="footer-contact">
-          <h4>Contacto directo</h4>
-          <a href="https://wa.me/595983002684" target="_blank" rel="noopener" class="footer-whatsapp">
-            <i class="fab fa-whatsapp"></i> +595 983 002 684
+          <h4>¿Querés ser nuestro cliente?</h4>
+          <p class="footer-contact-text">Registrate y un vendedor te contacta con los mejores precios.</p>
+          <a href="#registro" class="btn btn-primary btn-sm">
+            Registrate ahora
           </a>
           <a href="mailto:jhonatan@grupo-dip.com" class="footer-email">
             <i class="fas fa-envelope"></i> jhonatan@grupo-dip.com

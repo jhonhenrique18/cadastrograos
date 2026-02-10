@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormHandling();
   initNavbarScroll();
   initCatalogModal();
-  initWhatsAppTracking();
+  initFloatingCta();
   initScrollTracking();
 });
 
@@ -296,20 +296,20 @@ function initCatalogModal() {
   });
 }
 
-/* ---------- WhatsApp Click Tracking (Meta Pixel) ---------- */
-function initWhatsAppTracking() {
-  const whatsappLinks = document.querySelectorAll('a[href*="wa.me"], .whatsapp-float');
+/* ---------- Floating CTA Button (appears after scrolling past hero form) ---------- */
+function initFloatingCta() {
+  const floatingCta = document.getElementById('floatingCta');
+  const heroForm = document.getElementById('registro');
+  if (!floatingCta || !heroForm) return;
   
-  whatsappLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (typeof fbq === 'function') {
-        fbq('track', 'Contact', {
-          content_name: 'WhatsApp Click',
-          content_category: 'WhatsApp'
-        });
-      }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // Show floating CTA when hero form is NOT visible
+      floatingCta.style.display = entry.isIntersecting ? 'none' : 'block';
     });
-  });
+  }, { threshold: 0.1 });
+  
+  observer.observe(heroForm);
 }
 
 /* ---------- Scroll Depth Tracking (Meta Pixel) ---------- */
