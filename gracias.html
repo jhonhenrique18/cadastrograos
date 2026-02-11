@@ -29,10 +29,23 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '615912274768763');
     fbq('track', 'PageView');
-    fbq('track', 'Lead');
+    
+    // Only fire Lead event for qualified business types
+    // (distribuidor, tienda, restaurante) - NOT consumidor_final, quiero_revender, otro
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var tipo = params.get('tipo') || '';
+      var qualified = ['distribuidor', 'tienda', 'restaurante'];
+      if (qualified.indexOf(tipo) !== -1) {
+        fbq('track', 'Lead', {
+          content_name: tipo,
+          content_category: 'Qualified Lead'
+        });
+      }
+    })();
   </script>
   <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=615912274768763&ev=Lead&noscript=1"
+    src="https://www.facebook.com/tr?id=615912274768763&ev=PageView&noscript=1"
   /></noscript>
 </head>
 <body class="thankyou-body">
@@ -54,12 +67,12 @@
 
       <!-- Message -->
       <h1>¡Gracias, <span id="leadName">amigo</span>!</h1>
-      <p class="thankyou-message">
+      <p class="thankyou-message" id="thankyouMessage">
         Recibimos tu registro. Nuestro vendedor te va a contactar pronto para ofrecerte los mejores precios mayoristas en especias y condimentos.
       </p>
 
-      <!-- Urgency CTA -->
-      <div class="thankyou-urgent">
+      <!-- Urgency CTA - Only shown to qualified leads -->
+      <div class="thankyou-urgent" id="urgentSection" style="display:none">
         <p class="urgent-label">¿Es urgente? Hablá directo con nosotros:</p>
         <a href="https://wa.me/595983002684?text=Hola%2C%20acabo%20de%20registrarme%20en%20su%20página%20y%20necesito%20atención%20inmediata." 
            class="btn btn-whatsapp btn-lg btn-block" target="_blank" rel="noopener">
@@ -82,14 +95,28 @@
   </div>
 
   <script>
-    // Get name from URL params and display it
+    // Get name and business type from URL params
     (function() {
       const params = new URLSearchParams(window.location.search);
       const nombre = params.get('nombre');
+      const tipo = params.get('tipo') || '';
       
+      // Display lead name
       if (nombre) {
-        const nameEl = document.getElementById('leadName');
-        nameEl.textContent = decodeURIComponent(nombre);
+        document.getElementById('leadName').textContent = decodeURIComponent(nombre);
+      }
+      
+      // Qualified business types that get WhatsApp contact
+      const qualified = ['distribuidor', 'tienda', 'restaurante'];
+      const isQualified = qualified.includes(tipo);
+      
+      if (isQualified) {
+        // Show WhatsApp urgent section for qualified leads
+        document.getElementById('urgentSection').style.display = '';
+      } else {
+        // Show alternative message for non-qualified leads
+        document.getElementById('thankyouMessage').textContent = 
+          'Recibimos tu registro. Vamos a analizar tu solicitud y si podemos ayudarte, nuestro equipo te va a contactar.';
       }
     })();
 

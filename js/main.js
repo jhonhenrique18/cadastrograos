@@ -244,9 +244,9 @@ async function handleFormSubmit(e) {
     console.warn('Webhook error:', error);
   }
   
-  // Always redirect to thank you page with name
+  // Redirect to thank you page with name and business type
   const encodedName = encodeURIComponent(nombre.split(' ')[0]);
-  window.location.href = '/gracias?nombre=' + encodedName;
+  window.location.href = '/gracias?nombre=' + encodedName + '&tipo=' + encodeURIComponent(tipoNegocio);
 }
 
 /* ---------- Navbar Scroll Effect ---------- */
