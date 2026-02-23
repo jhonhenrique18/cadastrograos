@@ -59,12 +59,17 @@
     (function() {
       var params = new URLSearchParams(window.location.search);
       var tipo = params.get('tipo') || '';
-      var qualified = ['distribuidor', 'tienda', 'restaurante'];
-      if (qualified.indexOf(tipo) !== -1) {
+      var conversionValues = {
+        'distribuidor': 10.0,
+        'tienda': 5.0,
+        'restaurante': 3.0
+      };
+      var value = conversionValues[tipo];
+      if (value) {
         gtag('event', 'conversion', {
-          send_to: 'AW-17970527616/PASTE_YOUR_CONVERSION_LABEL_HERE',
-          event_category: 'Qualified Lead',
-          event_label: tipo
+          'send_to': 'AW-17970527616/vq5aCNj8nv0bEID7gflC',
+          'value': value,
+          'currency': 'USD'
         });
       }
     })();
