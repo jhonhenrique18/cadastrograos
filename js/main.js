@@ -213,6 +213,7 @@ async function handleFormSubmit(e) {
   const utmContent = urlParams.get('utm_content') || '';
   const utmTerm = urlParams.get('utm_term') || '';
   const fbclid = urlParams.get('fbclid') || '';
+  const gclid = urlParams.get('gclid') || '';
   
   // Prepare form data (Make.com parses each field separately)
   const formData = new FormData();
@@ -228,6 +229,7 @@ async function handleFormSubmit(e) {
   formData.append('utm_content', utmContent);
   formData.append('utm_term', utmTerm);
   formData.append('fbclid', fbclid);
+  formData.append('gclid', gclid);
   formData.append('origen', 'Landing Page Grãos S.A.');
   
   // Send to webhook
@@ -341,7 +343,7 @@ function initFloatingCta() {
   }
 }
 
-/* ---------- Scroll Depth Tracking (Meta Pixel) ---------- */
+/* ---------- Scroll Depth Tracking (Meta Pixel + Google Ads) ---------- */
 function initScrollTracking() {
   const thresholds = [25, 50, 75, 100];
   const tracked = new Set();
@@ -358,6 +360,12 @@ function initScrollTracking() {
         if (typeof fbq === 'function') {
           fbq('trackCustom', 'ScrollDepth', {
             percent: threshold
+          });
+        }
+        if (typeof gtag === 'function') {
+          gtag('event', 'scroll_depth', {
+            percent: threshold,
+            send_to: 'AW-17970527616'
           });
         }
       }
